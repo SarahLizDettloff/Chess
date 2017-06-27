@@ -1,0 +1,727 @@
+####Sarah Dettloff
+
+###June 26th 2017
+
+
+
+import os
+
+import sys
+
+
+
+def newgame():
+
+    pieceType=raw_input("Type in the name of the piece you want to see the potential moves of.\n")
+
+    pieceLocation=raw_input("Enter the location of that piece: \n")
+
+    board = [[0] * 7 for x in xrange(7)]
+
+    if len(pieceLocation) > 2:
+
+        print("Please enter one letter and one digit.")
+
+        clear = lambda: os.system('cls')
+
+        clear()
+
+        newgame()
+
+    pieceKind = ""
+
+    pieceKind=pieceType
+
+    if (pieceKind == "rook"):
+
+        print ("Possible Rook Moves", possibleRookMoves(pieceLocation, board))
+
+        printRook()
+
+    elif (pieceKind == "knight"):
+
+        print ("Possible Knight Moves ", possibleKnightMoves(pieceLocation, board))
+
+        printKnight()
+
+    elif (pieceKind == "queen"):
+
+        print ("Possible Queen Moves ", possibleQueenMoves(pieceLocation, board))
+
+        printQueen()
+
+    elif (pieceKind == "bishop"):
+
+        print ("Possible Bishop Moves", possibleBishopMoves(pieceLocation, board))
+
+        printBishop()
+
+    elif (pieceKind == "pawn"):
+
+        print ("Possible Pawn Moves", possiblePawnMoves(pieceLocation, board))
+
+        printPawn()
+
+    elif (pieceKind == "king"):
+
+        print ("Possible King Moves", possibleKingMoves(pieceLocation, board))
+
+        printKing()
+
+    else:
+
+        print("Please enter a valid chess piece.\nExample: rook, knight, queen, bishop, pawn, king")
+
+        clear = lambda: os.system('cls')
+
+        clear()
+
+    newgame()
+
+
+
+def printQueen():
+
+    print"""
+
+    ()   
+
+  <~~~~>  
+
+   \__/    
+
+  (____)   
+
+   |  | 
+
+   |  | 
+
+   |__|  
+
+  /____\  
+
+ (______) 
+
+(________)  
+
+    """
+
+def printBishop():
+
+    print"""
+
+   <>_
+
+ (\)  )   
+
+ (____)   
+
+  \__/ 
+
+ (____)
+
+  |  |   
+
+  |__|   
+
+ /____\ 
+
+(______) 
+
+    """
+
+def printRook():
+
+    print"""
+
+ WWWWWW 
+
+  |  |
+
+  |  |   
+
+  |__|   
+
+ /____\ 
+
+(______)
+
+    """
+
+def printPawn():
+
+    print"""
+
+  __
+
+ (  )   
+
+  ||   
+
+ /__\  
+
+(____)
+
+    """
+
+def printKnight():
+
+    print"""
+
+ __/''')
+
+]___ 0  } 
+
+    /   }
+
+   /~    }
+
+   \____)
+
+   /____)
+
+  (______)
+
+    """
+
+def printKing():
+
+    print"""
+
+    .::.          
+
+    _::_  
+
+  _/____\_  
+
+  \      /   
+
+   \____/   
+
+   (____)  
+
+    |  |   
+
+    |__| 
+
+   /    \ 
+
+  (______) 
+
+ (________)
+
+ /________\ 
+
+    """
+
+
+
+
+
+def possibleKnightMoves(position, board):
+
+    possibleMoves = []
+
+    indextoMatrix = {
+
+   0: "a",
+
+   1: "b",
+
+   2: "c",
+
+   3: "d",
+
+   4: "e",
+
+   5: "f",
+
+   6: "g",
+
+   7: "h"
+
+}
+
+    matrixtoIndex = {
+
+   "a" : 0,
+
+   "b" : 1,
+
+   "c" : 2,
+
+   "d" : 3,
+
+   "e" : 4,
+
+   "f" : 5,
+
+   "g" : 6,
+
+   "h" : 7
+
+}
+
+
+
+    yCoordinates, xCoordinates = list(position.strip().lower())
+
+    xCoordinates = int(xCoordinates) - 1
+
+    yCoordinates = matrixtoIndex[yCoordinates]
+
+    x,y = xCoordinates, yCoordinates
+
+    
+
+    try:
+
+        possibleMoves.append([x + 1, y - 2])
+
+        possibleMoves.append([x + 2, y - 1])
+
+        possibleMoves.append([x + 2, y + 1])
+
+        possibleMoves.append([x + 1, y + 2])
+
+        possibleMoves.append([x - 1, y + 2])
+
+        possibleMoves.append([x - 2, y + 1])
+
+        possibleMoves.append([x - 2, y - 1])
+
+        possibleMoves.append([x - 1, y - 2])
+
+    except:
+
+        pass
+
+    
+
+    tryMove = [x for x in possibleMoves if x[0] >=0 and x[1] >=0]
+
+    allPossibleMoves = tryMove
+
+    allPossibleMoves = ["".join([indextoMatrix[x[1]], str(x[0] + 1)]) for x in tryMove]
+
+    return allPossibleMoves
+
+
+
+def possibleQueenMoves(position, board):
+
+    possibleMoves = []
+
+    indextoMatrix = {
+
+   0: "a",
+
+   1: "b",
+
+   2: "c",
+
+   3: "d",
+
+   4: "e",
+
+   5: "f",
+
+   6: "g",
+
+   7: "h"
+
+}
+
+    matrixtoIndex = {
+
+   "a" : 0,
+
+   "b" : 1,
+
+   "c" : 2,
+
+   "d" : 3,
+
+   "e" : 4,
+
+   "f" : 5,
+
+   "g" : 6,
+
+   "h" : 7
+
+}
+
+    yCoordinates, xCoordinates = list(position.strip().lower())
+
+    xCoordinates = int(xCoordinates) - 1
+
+    yCoordinates = matrixtoIndex[yCoordinates]
+
+    x,y = xCoordinates, yCoordinates
+
+    try:
+
+        possibleMoves.append([x + 1, y + 1])
+
+        possibleMoves.append([x + 1, y - 1])
+
+        possibleMoves.append([x - 1, y + 1])
+
+        possibleMoves.append([x - 1, y - 2])
+
+        possibleMoves.append([x + 1, y])
+
+        possibleMoves.append([x, y - 1])
+
+        possibleMoves.append([x - 1, y])
+
+        possibleMoves.append([x, y + 1])
+
+    except:
+
+        pass
+
+    tryMove = [x for x in possibleMoves if x[0] >=0 and x[1] >=0]
+
+    allPossibleMoves = tryMove
+
+    allPossibleMoves = ["".join([indextoMatrix[x[1]], str(x[0] + 1)]) for x in tryMove]
+
+    return allPossibleMoves
+
+
+
+def possibleBishopMoves(position,board):
+
+    possibleMoves = []
+
+    indextoMatrix = {
+
+   0: "a",
+
+   1: "b",
+
+   2: "c",
+
+   3: "d",
+
+   4: "e",
+
+   5: "f",
+
+   6: "g",
+
+   7: "h"
+
+}
+
+    matrixtoIndex = {
+
+   "a" : 0,
+
+   "b" : 1,
+
+   "c" : 2,
+
+   "d" : 3,
+
+   "e" : 4,
+
+   "f" : 5,
+
+   "g" : 6,
+
+   "h" : 7
+
+}
+
+
+
+    yCoordinates, xCoordinates = list(position.strip().lower())
+
+    xCoordinates = int(xCoordinates) - 1
+
+    yCoordinates = matrixtoIndex[yCoordinates]
+
+    x,y = xCoordinates, yCoordinates
+
+    try:
+
+        possibleMoves.append([x + 1, y + 1])
+
+        possibleMoves.append([x + 1, y - 1])
+
+        possibleMoves.append([x - 1, y + 1])
+
+        possibleMoves.append([x - 1, y - 1])
+
+    except:
+
+        pass
+
+
+
+    tryMove = [x for x in possibleMoves if x[0] >=0 and x[1] >=0]
+
+    allPossibleMoves = tryMove
+
+    allPossibleMoves = ["".join([indextoMatrix[x[1]], str(x[0] + 1)]) for x in tryMove]
+
+    return allPossibleMoves   
+
+
+
+def possiblePawnMoves(position, board):
+
+    possibleMoves = []
+
+    indextoMatrix = {
+
+   0: "a",
+
+   1: "b",
+
+   2: "c",
+
+   3: "d",
+
+   4: "e",
+
+   5: "f",
+
+   6: "g",
+
+   7: "h"
+
+}
+
+    matrixtoIndex = {
+
+   "a" : 0,
+
+   "b" : 1,
+
+   "c" : 2,
+
+   "d" : 3,
+
+   "e" : 4,
+
+   "f" : 5,
+
+   "g" : 6,
+
+   "h" : 7
+
+}
+
+
+
+    yCoordinates, xCoordinates = list(position.strip().lower())
+
+    xCoordinates = int(xCoordinates) - 1
+
+    yCoordinates = matrixtoIndex[yCoordinates]
+
+    x,y = xCoordinates, yCoordinates
+
+    try:
+
+        possibleMoves.append([x + 2, y])
+
+        possibleMoves.append([x + 1, y + 1])
+
+        possibleMoves.append([x + 1, y - 1])
+
+    except:
+
+        pass
+
+
+
+    tryMove = [x for x in possibleMoves if x[0] >=0 and x[1] >=0]
+
+    allPossibleMoves = tryMove
+
+    allPossibleMoves = ["".join([indextoMatrix[x[1]], str(x[0] + 1)]) for x in tryMove]
+
+    return allPossibleMoves
+
+
+
+def possibleRookMoves(position, board):
+
+    possibleMoves = []
+
+    indextoMatrix = {
+
+   0: "a",
+
+   1: "b",
+
+   2: "c",
+
+   3: "d",
+
+   4: "e",
+
+   5: "f",
+
+   6: "g",
+
+   7: "h"
+
+}
+
+    matrixtoIndex = {
+
+   "a" : 0,
+
+   "b" : 1,
+
+   "c" : 2,
+
+   "d" : 3,
+
+   "e" : 4,
+
+   "f" : 5,
+
+   "g" : 6,
+
+   "h" : 7
+
+}
+
+
+
+    yCoordinates, xCoordinates = list(position.strip().lower())
+
+    xCoordinates = int(xCoordinates) - 1
+
+    yCoordinates = matrixtoIndex[yCoordinates]
+
+    x,y = xCoordinates, yCoordinates
+
+    try:
+
+        possibleMoves.append([x + 1, y])
+
+        possibleMoves.append([x, y - 1])
+
+        possibleMoves.append([x - 1, y])
+
+        possibleMoves.append([x, y + 1])
+
+    except:
+
+        pass
+
+
+
+    tryMove = [x for x in possibleMoves if x[0] >=0 and x[1] >=0]
+
+    allPossibleMoves = tryMove
+
+    allPossibleMoves = ["".join([indextoMatrix[x[1]], str(x[0] + 1)]) for x in tryMove]
+
+    return allPossibleMoves
+
+
+
+def possibleKingMoves(position, board):
+
+    possibleMoves = []
+
+    indextoMatrix = {
+
+   0: "a",
+
+   1: "b",
+
+   2: "c",
+
+   3: "d",
+
+   4: "e",
+
+   5: "f",
+
+   6: "g",
+
+   7: "h"
+
+}
+
+    matrixtoIndex = {
+
+   "a" : 0,
+
+   "b" : 1,
+
+   "c" : 2,
+
+   "d" : 3,
+
+   "e" : 4,
+
+   "f" : 5,
+
+   "g" : 6,
+
+   "h" : 7
+
+}
+
+
+
+    yCoordinates, xCoordinates = list(position.strip().lower())
+
+    xCoordinates = int(xCoordinates) - 1
+
+    yCoordinates = matrixtoIndex[yCoordinates]
+
+    x,y = xCoordinates, yCoordinates
+
+    try:
+
+        possibleMoves.append([x + 1, y])
+
+        possibleMoves.append([x + 2, y -+ 1])
+
+        possibleMoves.append([x, y + 1])
+
+        possibleMoves.append([x - 1, y + 1])
+
+        possibleMoves.append([x - 1, y])
+
+        possibleMoves.append([x, y - 1])
+
+        possibleMoves.append([x + 1, y - 1])
+
+    except:
+
+        pass
+
+    
+
+    tryMove = [x for x in possibleMoves if x[0] >=0 and x[1] >=0]
+
+    allPossibleMoves = tryMove
+
+    allPossibleMoves = ["".join([indextoMatrix[x[1]], str(x[0] + 1)]) for x in tryMove]
+
+    return allPossibleMoves
+
+
+
+
+
+def main():
+
+    newgame()
+
+if __name__ == '__main__':
+
+    main()
