@@ -19,23 +19,18 @@ Step 3: Save file as .py<br />
 Step 4: Run and enjoy!<br />
 
 # Debugging Coverage
-Line 17: <br />
-	print ("Possible Rook Moves" + possibleRookMoves(pieceLocation, board)) <br />
-	strRookMoves = possibleRookMoves(pieceLocation, board) <br />
-	print ("Possible Rook Moves" + strRookMovs) <br />
-Line 135: <br />
-	if board[x+2][y] == "" and x== 1 and board[x+1][y] == "" <br />
-        	possibleMoves.[[x+1],[y-2]] <br />
-Line 110{ <br />
-indextoMatrix{ <br />
-   0 == "a", <br />
-   1 == "b", <br />
-   2 == "c", <br />
-   3 == "d", <br />
-   4 == "e", <br />
-   5 == "f", <br />
-   6 == "g", <br />
-   7 == "h" <br />
-} <br />
+1. Fixed Rook
+2. Fixed Queen
+3. Fixed Bishop
+4. Cleaned and reorganized code for King
+5. Cleand and reorganized code for Knight
+6. Added Pawn features
+7. Updated ASCII directory
+8. Changed Matrix to global variables
+9. Fixed boundaries
+10. Added feature to allow only legal chess board positions
+11. Added run()
+
 # Works Cited: <br />
 David Moeser, ASCII Chess Pieces, http://www.chessvariants.com/d.pieces/ascii.html(1996) <br />
+Unit testing, Python standard library, https://docs.python.org/2/library/unittest.html <br />
