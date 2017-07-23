@@ -1,7 +1,15 @@
-# chess
-# Move
-This chess project tackles the movement of chess pieces concerning algebraic notation. <br />
-It allows you to type in any chess piece name in all lower case along with the coordinates of that particular piece to retrieve all possible moves for that piece assuming no other pieces are on the board. <br />
+# Chess
+This chess program utilizes algebraic notation by providing the user with the potential chess moves on a chess board. <br />
+It allows the user to input the chess piece type as well as the coordinates on a chess board to estimate potential moves. <br />
+This is written, assuming no other chess pieces are on a board. <br />
+<br />
+Example of chess board coordinates: 
+<br />
+<br />
+![alt text](http://www.regencychess.co.uk/blog/wp-content/uploads/2012/05/empty-numbered-chess-set.gif)
+<br />
+(Image from http://www.regencychess.co.uk) <br />
+
 Example: <br />
 Output: Type in the name of the piece you want to see the potential moves of. <br />
 input: knight <br />
@@ -30,6 +38,10 @@ Step 4: Run and enjoy!<br />
 9. Fixed boundaries
 10. Added feature to allow only legal chess board positions
 11. Added run()
+12. Unit Test for Python.py was created and gave false positive results. Revised via advice from Shannon Simpson.
+13. Queen positions were revised.
+14. Input boundaries for user to only be able to input coordinates of letters a-h, and numbers 1-8.
+15. Fixed bug which only allowed lower case piece types to be inputted.
 
 # Works Cited: <br />
 David Moeser, ASCII Chess Pieces, http://www.chessvariants.com/d.pieces/ascii.html(1996) <br />
