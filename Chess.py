@@ -1,7 +1,7 @@
-####Sarah Dettloff
-
-###June 26th 2017
-
+# Sarah Dettloff
+# July 23rd 2017
+# Chess Console Application
+# This program displays the potential moves on chessboard by piece type and coordinates.
 
 import os
 import sys
@@ -38,7 +38,6 @@ chessPieceDict = {
     """,
     "Knight":
 """
-
  __/''')
 ]___ 0  } 
     /   }
@@ -73,56 +72,6 @@ chessPieceDict = {
  (________) 
     """}
 
-def newgame():
-    clear = lambda: os.system('cls')
-    clear()
-
-def run():
-    board = [[0] * 8 for x in xrange(8)]
-    pieceType=raw_input("Type in the name of the piece you want to see the potential moves of.\n")
-    pieceLocation=raw_input("Enter the location of that piece: \n")
-    if pieceLocation[1] == "9":
-        print("The maximum number that can be entered is '8'.")
-        newgame()
-        main()
-    else:
-        while len(pieceLocation) < 3:
-            if (pieceType == "rook"):
-                print ("Possible Rook Moves", possibleRookMoves(pieceLocation, board))
-                print(chessPieceDict["Rook"])
-                break
-            elif (pieceType == "knight"):
-                print ("Possible Knight Moves ", possibleKnightMoves(pieceLocation, board))
-                print(chessPieceDict["Knight"])
-                break
-            elif (pieceType == "queen"):
-                print ("Possible Queen Moves ", possibleQueenMoves(pieceLocation, board))
-                print(chessPieceDict["Queen"])
-                break
-            elif (pieceType == "bishop"):
-                print ("Possible Bishop Moves", possibleBishopMoves(pieceLocation, board))
-                print(chessPieceDict["bishop"])
-                break
-            elif (pieceType == "pawn"):
-                print ("Possible Pawn Moves", possiblePawnMoves(pieceLocation, board))
-                print(chessPieceDict["Pawn"])
-                break
-            elif (pieceType == "king"):
-                print ("Possible King Moves", possibleKingMoves(pieceLocation, board))
-                print(chessPieceDict["King"])
-                break
-            else:
-                print("Please enter a valid chess piece.\nExample: rook, knight, queen, bishop, pawn, king")
-                clear = lambda: os.system('cls')
-                clear()
-                break
-                newgame()
-                
-        else:
-            print("Please enter one letter and one digit.")
-            newgame()
-        main()
-
 def Matrix():
     global indextoMatrix
     indextoMatrix = {
@@ -147,6 +96,58 @@ def Matrix():
    "h" : 7,
 }
     
+def newgame():
+    clear = lambda: os.system('cls')
+    clear()
+
+def run():
+    board = [[0] * 8 for x in xrange(8)]
+    pieceType=raw_input("Enter the type of the piece: \n")
+    pieceLocation=raw_input("Enter the location of that piece: \n")
+    if (pieceLocation[0] == "a") or (pieceLocation[0] == "b") or (pieceLocation[0] == "c") or (pieceLocation[0] == "d") or (pieceLocation[0] == "e") or (pieceLocation[0] == "f") or (pieceLocation[0] == "g") or (pieceLocation[0] == "h"):
+        if (pieceLocation[1] == "9") or (pieceLocation[1] == "0"):
+            print("The maximum number that can be entered is '8'.\nThe lowest number that can be entered is '1'.")
+            newgame()
+            main()
+        else:
+            while len(pieceLocation) < 3:
+                if (pieceType == "rook") or (pieceType == "Rook"):
+                    print ("Possible Rook Moves", sorted(possibleRookMoves(pieceLocation, board)))
+                    print(chessPieceDict["Rook"])
+                    break
+                elif (pieceType == "knight") or (pieceType == "Knight"):
+                    print ("Possible Knight Moves ", sorted(possibleKnightMoves(pieceLocation, board)))
+                    print(chessPieceDict["Knight"])
+                    break
+                elif (pieceType == "queen") or (pieceType == "Queen"):
+                    print ("Possible Queen Moves ", sorted(possibleQueenMoves(pieceLocation, board)))
+                    print(chessPieceDict["Queen"])
+                    break
+                elif (pieceType == "bishop") or (pieceType == "Bishop"):
+                    print ("Possible Bishop Moves", sorted(possibleBishopMoves(pieceLocation, board)))
+                    print(chessPieceDict["bishop"])
+                    break
+                elif (pieceType == "pawn") or (pieceType == "Pawn"):
+                    print ("Possible Pawn Moves", sorted(possiblePawnMoves(pieceLocation, board)))
+                    print(chessPieceDict["Pawn"])
+                    break
+                elif (pieceType == "king") or (pieceType == "King"):
+                    print ("Possible King Moves", sorted(possibleKingMoves(pieceLocation, board)))
+                    print(chessPieceDict["King"])
+                    break
+                    
+                else:
+                    print("Please enter a valid chess piece.\nExample: Rook, Knight, Queen, Bishop, Pawn, or King.")
+                    break   
+            else:
+                print("Please enter one letter(a-h) and one digit(1-8).")
+                main()
+    else:
+        print("Please enter a valid coordinates.\nThe first digit must be a letter a-h.")
+        newgame()
+        main()
+    main()
+
 def possibleKnightMoves(position, board):
     possibleMoves = []
     Matrix()
@@ -160,18 +161,13 @@ def possibleKnightMoves(position, board):
     except:
         pass
     try:
-        tryMove = board[x + 2][y - 1]
-        possibleMoves.append([x + 2, y - 1])
-    except:
-        pass
-    try:
-        tryMove = board[x + 2][y + 1]
-        possibleMoves.append([x + 2, y + 1])
-    except:
-        pass
-    try:
        tryMove = board[x + 1][y + 2]
        possibleMoves.append([x + 1, y + 2])
+    except:
+        pass
+    try:
+        tryMove = board[x - 1][y - 2]
+        possibleMoves.append([x - 1, y - 2])
     except:
         pass
     try:
@@ -190,13 +186,16 @@ def possibleKnightMoves(position, board):
     except:
         pass
     try:
-        tryMove = board[x - 1][y - 2]
-        possibleMoves.append([x - 1, y - 2])
+        tryMove = board[x + 2][y - 1]
+        possibleMoves.append([x + 2, y - 1])
     except:
         pass
-    
+    try:
+        tryMove = board[x + 2][y + 1]
+        possibleMoves.append([x + 2, y + 1])
+    except:
+        pass
     tryMove = [x for x in possibleMoves if x[0] >=0 and x[1] >=0]
-    allPossibleMoves = tryMove
     allPossibleMoves = ["".join([indextoMatrix[x[1]], str(x[0] + 1)]) for x in tryMove]
     return allPossibleMoves
     
@@ -210,15 +209,16 @@ def possibleQueenMoves(position, board):
     yCoordinates = matrixtoIndex[yCoordinates]
     x,y = xCoordinates, yCoordinates
     try:
+       tryMove = board[x + 1][y - 1]
+       possibleMoves.append([x + 1, y - 1])
+    except:
+        pass
+    try:
        tryMove = board[x + 1][y + 1]
        possibleMoves.append([x + 1, y + 1])
     except:
         pass
-    try:
-       tryMove = board[x - 1][y - 2]
-       possibleMoves.append([x - 1, y - 2])
-    except:
-        pass
+
     try:
        tryMove = board[x - 1][y - 1]
        possibleMoves.append([x - 1, y - 1])
@@ -353,9 +353,7 @@ def possibleQueenMoves(position, board):
                 possibleMoves.append((x, yCoordinates))
     except:
         pass
-    
     tryMove = [x for x in possibleMoves if x[0] >=0 and x[1] >=0]
-    allPossibleMoves = tryMove
     allPossibleMoves = ["".join([indextoMatrix[x[1]], str(x[0] + 1)]) for x in tryMove]
     return allPossibleMoves
 
@@ -526,9 +524,7 @@ def possibleBishopMoves(position,board):
        possibleMoves.append([x - 8, y + 8])
     except:
         pass
-    
     tryMove = [x for x in possibleMoves if x[0] >=0 and x[1] >=0]
-    allPossibleMoves = tryMove
     allPossibleMoves = ["".join([indextoMatrix[x[1]], str(x[0] + 1)]) for x in tryMove]
     return allPossibleMoves
 
@@ -554,23 +550,33 @@ def possiblePawnMoves(position, board):
     else:
         pawnAttack=raw_input("Does this pawn move consist of an taking a piece? Enter 'y' for yes, or anything else for no\n")
         if pawnAttack == "y":
-            tryMove = board[x + 1][y - 1]
-            possibleMoves.append([x + 1, y - 1])
-            tryMove = board[x + 1][y]
-            possibleMoves.append([x + 1, y])
-            tryMove = board[x - 1][y - 1]
-            possibleMoves.append([x - 1, y - 1])
-            tryMove = board[x - 1][y]
-            possibleMoves.append([x - 1, y])
+            try:
+                tryMove = board[x + 1][y - 1]
+                possibleMoves.append([x + 1, y - 1])
+            except:
+                pass
+            try:
+                tryMove = board[x + 1][y]
+                possibleMoves.append([x + 1, y])
+            except:
+                pass
+            try:
+                tryMove = board[x - 1][y - 1]
+                possibleMoves.append([x - 1, y - 1])
+            except:
+                pass
+            try:
+                tryMove = board[x - 1][y]
+                possibleMoves.append([x - 1, y])
+            except:
+                pass
         else:
             try:
                 tryMove = board[x + 1][y]
                 possibleMoves.append([x + 1, y])
             except:
                 pass
-            
     tryMove = [x for x in possibleMoves if x[0] >=0 and x[1] >=0]
-    allPossibleMoves = tryMove
     allPossibleMoves = ["".join([indextoMatrix[x[1]], str(x[0] + 1)]) for x in tryMove]
     return allPossibleMoves
 
@@ -590,9 +596,7 @@ def possibleRookMoves(position, board):
                 possibleMoves.append((x, yCoordinates))
     except:
         pass
-
     tryMove = [x for x in possibleMoves if x[0] >=0 and x[1] >=0]
-    allPossibleMoves = tryMove
     allPossibleMoves = ["".join([indextoMatrix[x[1]], str(x[0] + 1)]) for x in tryMove]
     return allPossibleMoves
 
@@ -642,10 +646,8 @@ def possibleKingMoves(position, board):
        tryMove = board[x - 1][y - 1]
        possibleMoves.append([x - 1, y - 1])
     except:
-        pass
-                        
+        pass                    
     tryMove = [x for x in possibleMoves if x[0] >=0 and x[1] >=0]
-    allPossibleMoves = tryMove
     allPossibleMoves = ["".join([indextoMatrix[x[1]], str(x[0] + 1)]) for x in tryMove]
     return allPossibleMoves
 
